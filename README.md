@@ -80,3 +80,11 @@ on a specific date within the dataset, the price is set to `null`.
 
 # Evaluation
 When evaluating the code, we will install dependencies, run a single build, then start the development server.
+
+# Extra details
+
+- Keep your solution in a Version Control System of your choice. Provide the solution as a public repository that can be easily cloned by our development team.
+- Provide any instructions needed to set up the system in README.md.
+- You are encouraged to modify or extend the provided code if you think a different setup fits the task better.
+- If you have any questions, please don't hesitate to contact us at tech-recruitment@xeneta.com
+- Please let us know how much time you spent on the task, and of any difficulties that you ran into.
