@@ -28,14 +28,14 @@ $ npm run watch
 ```
 
 # Task
-Create a simple port-to-port search page, with visualization of the freight rates over time, on a provided port-port
+Create a port-to-port search page, with visualization of the freight rates over time, on a provided port-port
 combination, within a customizable date range.
 
 * Make it pretty-ish, using your awesome CSS skills
 * Make it efficient, limit network use, and load fast
 * Feel free to add your personal flair
 
-Please read the full document for the details on the build process and the APIs. 
+Please read the full document for the details on the build process and the APIs.
 
 # Building
 The project will build HTML using EJS templates from the `views` folder. Client-side JavaScript is built
@@ -65,17 +65,66 @@ Free text search for port codes and port names. Returns an object with matching 
 ```
 
 ## /api/rates/:origin/:destination/:fromdate/:todate
-Returns a timeseries of rates from port to port, within the given time-period. `origin` and `destination`
+Returns a timeseries of market metrics (low, average, high) from port to port, within the given time-period. `origin` and `destination`
 are port codes, the date formats are ISO-8601 dates, e.g. `2018-06-30`.
 https://github.com/xeneta/portsearchtask
 This returns an object containing a time-series of freight rates. The time-series is an array of arrays,
 containing the date and the price for that given day.
 
 ```json
-{"rates":[["2018-06-30",1972],["2018-07-01",2022],["2018-07-02",2022],["2018-07-03",2022]]}
+{
+    "origin": "USNYC",
+    "destination": "NOOSL",
+    "startDate": "2020-09-26",
+    "endDate": "2020-09-28",
+    "rates": {
+        "low": [
+            [
+                "2020-09-26",
+                2605
+            ],
+            [
+                "2020-09-27",
+                2603
+            ],
+            [
+                "2020-09-28",
+                null
+            ]
+        ],
+        "average": [
+            [
+                "2020-09-26",
+                2637
+            ],
+            [
+                "2020-09-27",
+                2637
+            ],
+            [
+                "2020-09-28",
+                null
+            ]
+        ],
+        "high": [
+            [
+                "2020-09-26",
+                2674
+            ],
+            [
+                "2020-09-27",
+                2687
+            ],
+            [
+                "2020-09-28",
+                null
+            ]
+        ]
+    }
+}
 ```
 
-Note that the dataset only contains data between `2017-08-30` and `2018-06-30`. If there is no rate available
+Note that the dataset only contains data between `2020-09-26` and `2020-09-28`. If there is no rate available
 on a specific date within the dataset, the price is set to `null`.
 
 # Evaluation
