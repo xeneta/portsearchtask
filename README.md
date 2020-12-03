@@ -1,90 +1,102 @@
-# My First Xeneta
-
-We are providing a simplified real-world usage scenario of a core
-Xeneta feature. In our system, users are given the option to search
-for origin and destination ports by name, and see a visualisation of
-the price development over a selected period of time. We provide a
-small backend with three API endpoints that return port information,
-do a simple string search, or return the time-series information about
-the prices. Your task is to develop an interface for the actions
-described below.
-
-
-
-## Usage
-
-```sh
-# Install dependencies
-$ npm install
-
-# Single build
-$ npm run build
-
-# Development server at localhost:3000
-$ npm start
-
-# Watcher build (Rebuilds on file changes) + Development server at localhost:3000
-$ npm run watch
-```
-
-# Task
-Create a simple port-to-port search page, with visualization of the freight rates over time, on a provided port-port
-combination, within a customizable date range.
-
-* Make it pretty-ish, using your awesome CSS skills
-* Make it efficient, limit network use, and load fast
-* Feel free to add your personal flair
-
-Please read the full document for the details on the build process and the APIs. 
-
-# Building
-The project will build HTML using EJS templates from the `views` folder. Client-side JavaScript is built
-from the `src/index.js` entrypoint with Webpack 4 and Babel 7. CSS is currently loaded
-statically from the `public/stylesheets` folder.
-
-You are free to install any frameworks, libraries, and software you want using NPM or Yarn. You can also change
-any aspect of the build process if needed. For example, the build setup supports React/JSX out of the box,
-but if you are more comfortable using for example Vue.js, we're not going to stop you.
-
 # API
-Provided is a simple web server, with an API that allows looking up ports and querying for time-series of freight
-rates between the respective ports. It is available from http://localhost:3000/
 
-## /api/ports/:id
-Returns a single port based on the provided port code. (NOOSL, CNSGH, NLRTM)
+We provide you with an API that serves a simplified subset of real-world data.
 
-```json
-{"id":"NOOSL","country":"NO","name":"Oslo"}
+## Authorization
+
+API is protected by an unique API key, which is sent to you along with this task specification. If you have not received your API key, do not hesitate to contact us at tech-recruitment@xeneta.com .
+
+To authorize with the API, send `X-Api-Key=<your-api-key>` header in the API request.
+
+## Ports API
+
+This API endpoint returns ports that are available in the system. Information about each port includes:
+
+- 5-character port code
+- Human-friendly port name
+
+Example:
+
+```
+curl -H 'x-api-key: <your-api-key>' https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod/ports
+
+
+[
+    {
+        "code": "CNSGH",
+        "name": "Shanghai"
+    },
+    {
+        "code": "NLRTM",
+        "name": "Rotterdam"
+    },
+    ...
+]
+
 ```
 
-## /api/ports/search/:query
-Free text search for port codes and port names. Returns an object with matching ports.
 
-```json
-{"results":[{"id":"CNSGH","country":"CN","name":"Shanghai"},{"id":"CNSTG","country":"CN","name":"Shantou"}]}
+## Market rates API
+
+This API endpoint returns market average, low and high prices of shipping a container on certain days between two ports that are sent to the API as parameters.
+
+API parameters are:
+
+- `origin`, `destination`: 5-character port codes, origin and destination ports respectively
+
+Example:
+
+```
+curl -H 'x-api-key: <your-api-key>' 'https://685rp9jkj1.execute-api.eu-west-1.amazonaws.com/prod/rates?origin=CNSGH&destination=NLRTM'
+
+[
+    {
+        "day": "2021-01-01",
+        "mean": 500,
+        "low": 100,
+        "high": 800
+    },
+    {
+        "day": "2021-01-02",
+        "mean": null,
+        "low": null,
+        "high": null
+    },
+    {
+        "day": "2021-01-03",
+        "mean": 600,
+        "low": 100,
+        "high": 900,
+    },
+    ...
+]
 ```
 
-## /api/rates/:origin/:destination/:fromdate/:todate
-Returns a timeseries of rates from port to port, within the given time-period. `origin` and `destination`
-are port codes, the date formats are ISO-8601 dates, e.g. `2018-06-30`.
-https://github.com/xeneta/portsearchtask
-This returns an object containing a time-series of freight rates. The time-series is an array of arrays,
-containing the date and the price for that given day.
 
-```json
-{"rates":[["2018-06-30",1972],["2018-07-01",2022],["2018-07-02",2022],["2018-07-03",2022]]}
-```
+# Assignment
 
-Note that the dataset only contains data between `2017-08-30` and `2018-06-30`. If there is no rate available
-on a specific date within the dataset, the price is set to `null`.
+The task ahead of you comprises 2 main subtasks. Please read both of them carefully and remember to work on both.
 
-# Evaluation
-When evaluating the code, we will install dependencies, run a single build, then start the development server.
+1. Create an interactive web page that visualizes how average, low and high prices change over time on a selected trade-lane, for a customizable date range. Our stack is based on ReactJS, Redux and Webpack, but you are free to choose anything you like.
+2. Implement "download screenshot" functionality for the page implemented in the first part.
+
+## Part 1
+
+The user of the page should be able to search for origin and destination ports, pick the date range they are interested in, and when those are chosen the user should see a graph that displays average, low and high market prices over time. This is how this looks in our platform:
+
+![Ocean Market Price Graph](graph.png)
+
+If you think there is a different way of visualization that serves the task better, feel free do do it your own way – we only present this screenshot as an example.
+
+## Part 2
+
+Make it possible for users to download this visualization as an image that they can later embed in their presentations and reports.
+
 
 # Extra details
 
-- Keep your solution in a Version Control System of your choice. Provide the solution as a public repository that can be easily cloned by our development team.
-- Provide any instructions needed to set up the system in README.md.
-- You are encouraged to modify or extend the provided code if you think a different setup fits the task better.
-- If you have any questions, please don't hesitate to contact us at tech-recruitment@xeneta.com
-- Please let us know how much time you spent on the task, and of any difficulties that you ran into.
+* Keep your solution in a Version Control System of your choice. **Provide the solution as a public repository that can be easily cloned by our development team.**
+* Provide any instructions needed to set up the system in `README.md`.
+* Ensure the page handles errors and edge cases properly.
+* If you have any questions, please don't hesitate to contact us at tech-recruitment@xeneta.com
+* Please let us know how much time you spent on the task, and of any difficulties that you ran into.
