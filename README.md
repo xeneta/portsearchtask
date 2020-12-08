@@ -1,4 +1,36 @@
-# API
+# Assignment
+
+The assignment ahead of you comprises 2 main tasks. Please read both of them carefully and remember to work on both.
+
+- In [Task 1](#task-1) we ask you to implement a web page that visualizes the data returned by the [API](#api-description).
+- In [Task 2](#task-2), describe how would you approach extending the functionality of the page according to the new requirements.
+
+## Task 1
+
+Create an interactive web page that visualizes how average, low and high prices change over time on a selected trade-lane, for a customizable date range. Our stack is based on D3, ReactJS, Redux and Webpack, but you are free to choose anything you like.
+
+The user of the page should be able to search for origin and destination ports, pick the date range they are interested in, and when those are chosen the user should see a graph that displays average, low and high market prices over time. This is how this looks in our platform:
+
+![Ocean Market Price Graph](graph.png)
+
+If you think there is a different way of visualization that serves the task better, feel free do do it your own way – we only present this screenshot as an example.
+
+## Task 2
+
+Imagine that users now want to be able to download the visualization from [Task 1](#task-1) as an image that they can later embed in their presentations and reports. Users want the image to include the graph of the selected price and the color-coded legend.
+
+Describe, using a couple of paragraphs, how you would solve this new user problem. If you can think of alternative solutions, describe them along with their trade-offs.
+
+
+# Extra details
+
+* Keep your solution in a Version Control System of your choice. **Provide the solution as a public repository that can be easily cloned by our development team.**
+* Provide any instructions needed to set up the system in `README.md`.
+* Ensure the page handles errors and edge cases properly.
+* If you have any questions, please don't hesitate to contact us at tech-recruitment@xeneta.com
+* Please let us know how much time you spent on the task, and of any difficulties that you ran into.
+
+# API Description
 
 We provide you with an API that serves a simplified subset of real-world data.
 
@@ -71,32 +103,3 @@ curl -H 'x-api-key: <your-api-key>' 'https://685rp9jkj1.execute-api.eu-west-1.am
     ...
 ]
 ```
-
-
-# Assignment
-
-The task ahead of you comprises 2 main subtasks. Please read both of them carefully and remember to work on both.
-
-1. Create an interactive web page that visualizes how average, low and high prices change over time on a selected trade-lane, for a customizable date range. Our stack is based on ReactJS, Redux and Webpack, but you are free to choose anything you like.
-2. Implement "download screenshot" functionality for the page implemented in the first part.
-
-## Part 1
-
-The user of the page should be able to search for origin and destination ports, pick the date range they are interested in, and when those are chosen the user should see a graph that displays average, low and high market prices over time. This is how this looks in our platform:
-
-![Ocean Market Price Graph](graph.png)
-
-If you think there is a different way of visualization that serves the task better, feel free do do it your own way – we only present this screenshot as an example.
-
-## Part 2
-
-Make it possible for users to download this visualization as an image that they can later embed in their presentations and reports.
-
-
-# Extra details
-
-* Keep your solution in a Version Control System of your choice. **Provide the solution as a public repository that can be easily cloned by our development team.**
-* Provide any instructions needed to set up the system in `README.md`.
-* Ensure the page handles errors and edge cases properly.
-* If you have any questions, please don't hesitate to contact us at tech-recruitment@xeneta.com
-* Please let us know how much time you spent on the task, and of any difficulties that you ran into.
